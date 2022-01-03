@@ -8,6 +8,8 @@ import {
     Text,
     useStyleSheet,
     Icon,
+    ApplicationProvider,
+    Divider,
 } from '@ui-kitten/components';
 import {
     HomeIcon,
@@ -23,6 +25,8 @@ import { RegisterScreen } from '../screens/RegisterScreen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View } from "react-native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import * as eva from '@eva-design/eva';
+import { default as theme } from '../theme.json';
 
 
 const layoutoutline = (props) => (
@@ -36,7 +40,7 @@ const DrawerContent = ({ navigation, state }) => {
 
     const Header = () => (
         <Layout style={styles.header}>
-            <View style={styles.profileContainer}>
+            <Layout style={styles.profileContainer}>
                 <Avatar
                     size="giant"
                     source={require("../assets/icon.png")}
@@ -44,7 +48,8 @@ const DrawerContent = ({ navigation, state }) => {
                 <Text style={styles.profileName} category="h6">
                     Demo Giua Ky
                 </Text>
-            </View>
+            </Layout>
+            <Divider style={styles.Divider} />
         </Layout>
     );
 
@@ -62,13 +67,17 @@ const DrawerContent = ({ navigation, state }) => {
     )
 };
 
+
+
 export const HomeDrawerNavigator = () => (
-    <Navigator drawerContent={props => <DrawerContent {...props} />}>
-        <Screen name='Home' component={BottomTabsNavigator} />
-        <Screen name='About' component={AboutScreen} />
-        <Screen name='Login' component={LoginScreen} />
-        <Screen name='Register' component={RegisterScreen} />
-    </Navigator>
+    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+        <Navigator drawerContent={props => <DrawerContent {...props} />}>
+            <Screen name='Home' component={BottomTabsNavigator} />
+            <Screen name='About' component={AboutScreen} />
+            <Screen name='Login' component={LoginScreen} />
+            <Screen name='Register' component={RegisterScreen} />
+        </Navigator>
+    </ApplicationProvider>
 );
 
 const themedStyles = StyleService.create({
@@ -89,5 +98,8 @@ const themedStyles = StyleService.create({
         width: 22,
         height: 22,
         marginRight: 8,
+    },
+    Divider: {
+        marginTop: 20
     },
 });

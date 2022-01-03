@@ -7,6 +7,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+
 export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
